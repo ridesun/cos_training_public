@@ -1,10 +1,8 @@
 #![no_std]
 #![no_main]
 
-use drv0 as _;
-use drv1 as _;
+use drv_common::DRV;
 
-use drv_common::CallEntry;
 
 #[no_mangle]
 fn main() {
@@ -14,14 +12,12 @@ fn main() {
     verify();
 }
 
-/* Todo: Implement it */
 fn traverse_drivers() {
-    libos::println!("\n!!! Fix it !!!\n");
-    // Parse range of init_calls by calling C function.
-    // display_initcalls_range(range_start, range_end);
-
-    // For each driver, display name & compatible
-    // display_drv_info(drv.name, drv.compatible);
+    libos::println!("{}",DRV.len());
+    for callentry in DRV {
+        let drv=callentry();
+        display_drv_info(drv.name, drv.compatible);
+    }
 }
 
 fn display_initcalls_range(start: usize, end: usize) {

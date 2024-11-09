@@ -16,11 +16,8 @@ SECTIONS
         *(.text .text.*)
         . = ALIGN(4K);
         etext = .;
-        init_calls_start = .;
-        KEEP(*(.init_calls))
-        init_calls_end = .;
     }
-
+    linkme_DRV : { *(linkme_DRV) }
     .rodata : ALIGN(4K) {
         srodata = .;
         *(.rodata .rodata.*)

@@ -1,13 +1,9 @@
 #![no_std]
 
-use drv_common::{CallEntry, Driver};
+use drv_common::{Driver,DRV};
+use linkme::distributed_slice;
 
-#[used]
-#[link_section = ".init_calls"]
-static DRV0_ENTRY: CallEntry = CallEntry {
-    init_fn: drv0_init_fn,
-};
-
+#[distributed_slice(DRV)]
 fn drv0_init_fn() -> Driver<'static> {
     Driver::info("rtc", "google,goldfish-rtc")
 }
